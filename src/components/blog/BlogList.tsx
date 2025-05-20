@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Clock, Tag } from 'lucide-react';
 import { BlogPost } from '@/lib/blog';
+import React from 'react';
 
 type BlogListProps = {
   posts: BlogPost[];
@@ -53,9 +54,9 @@ export const BlogList = ({ posts }: BlogListProps) => {
             All Posts
           </button>
           
-          {categories.map(category => (
+          {categories.map((category, index) => (
             <button
-              key={category}
+              key={`category-${category}`}
               onClick={() => setSelectedCategory(category)}
               className={`px-4 py-2 text-sm rounded-full transition-colors ${
                 selectedCategory === category
@@ -92,9 +93,18 @@ export const BlogList = ({ posts }: BlogListProps) => {
             >
               <Link href={`/blog/${post.slug}`} className="block">
                 <div className="relative h-48 bg-gray-200">
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <span>Featured Image</span>
-                  </div>
+                  {post.coverImage ? (
+                    <Image 
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <span>Featured Image</span>
+                    </div>
+                  )}
                 </div>
                 
                 <div className="p-6">

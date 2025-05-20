@@ -1,81 +1,85 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Section } from '../ui/Section';
-import { Bot, BarChart3, Workflow, Zap, Eye, ArrowUpRight } from 'lucide-react';
+import { Cpu, BarChart, Users, Clock, Shield, Globe } from 'lucide-react';
+
+const features = [
+  {
+    name: 'Intelligent Automation',
+    description: 'Automate complex workflows with AI that adapts and learns from your business processes.',
+    icon: Cpu,
+  },
+  {
+    name: 'Data Analytics',
+    description: 'Transform your data into actionable insights with our advanced analytics solutions.',
+    icon: BarChart,
+  },
+  {
+    name: 'Customer Experience',
+    description: 'Deliver personalized experiences at scale with AI-powered customer interaction systems.',
+    icon: Users,
+  },
+  {
+    name: 'Operational Efficiency',
+    description: 'Reduce manual tasks and streamline operations for greater productivity and cost savings.',
+    icon: Clock,
+  },
+  {
+    name: 'Secure Implementation',
+    description: 'Enterprise-grade security protocols protect your data throughout the automation process.',
+    icon: Shield,
+  },
+  {
+    name: 'Scalable Solutions',
+    description: 'Our solutions grow with your business, from startup to enterprise.',
+    icon: Globe,
+  },
+];
 
 export const Features = () => {
-  const features = [
-    {
-      icon: <Bot className="w-10 h-10 text-primary-600" />,
-      title: 'AI Chatbots',
-      description: 'Custom conversational AI solutions tailored to your business needs and brand voice.',
-      link: '/services',
-    },
-    {
-      icon: <Workflow className="w-10 h-10 text-primary-600" />,
-      title: 'Workflow Automation',
-      description: 'Automate repetitive tasks and streamline your business processes with AI.',
-      link: '/services',
-    },
-    {
-      icon: <BarChart3 className="w-10 h-10 text-primary-600" />,
-      title: 'Data Analysis',
-      description: 'Extract meaningful insights from your data with AI-powered analytics tools.',
-      link: '/services',
-    },
-    {
-      icon: <Zap className="w-10 h-10 text-primary-600" />,
-      title: 'API Integration',
-      description: 'Seamlessly connect your AI solutions with existing systems and applications.',
-      link: '/services',
-    },
-    {
-      icon: <Eye className="w-10 h-10 text-primary-600" />,
-      title: 'Computer Vision',
-      description: 'Leverage image recognition and processing for enhanced automation.',
-      link: '/services',
-    },
-    {
-      icon: <Bot className="w-10 h-10 text-primary-600" />,
-      title: 'Custom AI Solutions',
-      description: 'Bespoke AI implementations to solve your specific business challenges.',
-      link: '/services',
-    },
-  ];
-
   return (
-    <Section id="features" className="bg-white">
-      <div className="text-center mb-12 md:mb-20">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Our AI Automation Solutions</h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Leverage cutting-edge artificial intelligence to transform your business operations and drive growth.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="p-6 border border-gray-200 rounded-xl hover:shadow-md transition-shadow bg-white group"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
           >
-            <div className="mb-4">{feature.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-            <p className="text-gray-600 mb-4">{feature.description}</p>
-            <a 
-              href={feature.link} 
-              className="inline-flex items-center text-primary-600 font-medium group-hover:text-primary-700"
+            Comprehensive AI Automation Solutions
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-xl text-gray-600"
+          >
+            Powerful tools to transform your business operations and drive growth
+          </motion.p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+              className="bg-gray-50 border border-gray-100 rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow"
             >
-              Learn more
-              <ArrowUpRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-          </motion.div>
-        ))}
+              <div className="w-12 h-12 bg-primary-100 rounded-lg mb-5 flex items-center justify-center text-primary-600">
+                <feature.icon size={24} />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.name}</h3>
+              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }; 
