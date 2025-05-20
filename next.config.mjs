@@ -3,6 +3,8 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  output: 'export',
+  trailingSlash: true,
 };
 
 export default nextConfig; 

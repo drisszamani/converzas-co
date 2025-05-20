@@ -6,7 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '../ui/Button';
 import { CheckCircle, Loader2 } from 'lucide-react';
-import { submitToGoogleSheet } from '@/lib/googleSheets';
+
+// API endpoint - can be configured in env variables
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api/contact';
 
 // Validation schema
 const contactFormSchema = z.object({
@@ -36,14 +38,22 @@ export const ContactForm = () => {
     setSubmitError(null);
 
     try {
-      // Use the server action to submit data to Google Sheets
-      const result = await submitToGoogleSheet(data);
+      // Use fetch to submit to our API endpoint instead of server action
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
       
-      if (result) {
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
         setIsSuccess(true);
         reset();
       } else {
-        throw new Error('Failed to submit form');
+        throw new Error(result.message || 'Failed to submit form');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
